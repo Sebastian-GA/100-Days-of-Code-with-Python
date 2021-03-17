@@ -52,7 +52,7 @@ This is the function used to input information by terminal.
 input()  # Wait for input
 ```
 
-This function can a string as a parameter. This will be the text that will be printed to ask for the input. If there is no a string it simply will wait for the input.
+This function can receive a string as a parameter. This will be the text that will be printed to ask for the input. If there is no a string it simply will wait for the input.
 
 ``` python
 input("How are you doing? ")  # Output: How are you doing? _______
