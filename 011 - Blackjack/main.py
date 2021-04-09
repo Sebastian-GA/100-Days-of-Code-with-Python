@@ -95,28 +95,39 @@ def play_blackjack():
             print(f"Computer's cards are: {print_cards(computer_cards, False)}")
 
     # Print final cards
+    sum_cards_user = sum_cards(user_cards)
+    sum_cards_computer = sum_cards(computer_cards)
     print()
     print("-------------------------------------------------------")
-    print(f"Your final cards are: {print_cards(user_cards, False)} that sums these posible values {sum_cards(user_cards)}")
-    print(f"Computer's final cards are: {print_cards(computer_cards, False)} that sums these posible values {sum_cards(computer_cards)}")
+    print(f"Your final cards are: {print_cards(user_cards, False)} that sums these posible values {sum_cards_user}")
+    print(f"Computer's final cards are: {print_cards(computer_cards, False)} that sums these posible values {sum_cards_computer}")
 
 
     # Compare sums
-    if min(sum_cards(user_cards)) > 21 and min(sum_cards(computer_cards)) > 21:
+    if min(sum_cards_user) > 21 and min(sum_cards_computer) > 21:
         print("Computer and user went over")
-    elif min(sum_cards(user_cards)) > 21:
+    elif min(sum_cards_user) > 21:
         print("You went over. Computer wins")
-    elif min(sum_cards(computer_cards)) > 21:
+    elif min(sum_cards_computer) > 21:
         print("Computer went over. You win")
     else:
 
         # Remove all sums that are greater than 21
+        temp_sum = []
+        for value in sum_cards_user:
+            if value <= 21:
+                temp_sum.append(value)
+        sum_cards_user = temp_sum
+        for value in sum_cards_computer:
+            if value <= 21:
+                temp_sum.append(value)
+        sum_cards_computer = temp_sum
 
-        if max(sum_cards(user_cards)) == max(sum_cards(computer_cards)):
+        if max(sum_cards_user) == max(sum_cards_computer):
             print("It's a draw")
-        elif max(sum_cards(user_cards)) > max(sum_cards(computer_cards)):
+        elif max(sum_cards_user) > max(sum_cards_computer):
             print("You win")
-        elif max(sum_cards(user_cards)) < max(sum_cards(computer_cards)):
+        elif max(sum_cards_user) < max(sum_cards_computer):
             print("You lose")
     
 
