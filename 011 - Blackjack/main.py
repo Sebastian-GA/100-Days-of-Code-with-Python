@@ -28,8 +28,7 @@ def card_value(card):
         if card in ["K", "Q", "J"]:
             return 10
         else:
-            # return [1, 11]
-            return 1  # This is temporal
+            return [1, 11]
 
 def choose_card(deck):
     card = 0
@@ -42,10 +41,39 @@ def choose_card(deck):
     return card
 
 def sum_cards(cards):
-    sum = 0
+    values = []
+    final_sum = []
     for card in cards:
-        sum += card_value(card)
-    return [sum]  # Temporal
+        values.append(card_value(card))
+    
+    # Simplify list of values
+    temp_values = [0]
+    for value in values:
+        if type(value) == int:
+            temp_values[0] += value
+        else:
+            temp_values.append(value)
+    values = temp_values
+    
+    # Sum first and second values
+    while len(values) > 1:
+        temp_values = []
+        if type(values[0]) == int:
+            for i in values[1]:
+                temp_values.append(values[0] + i)
+        else:
+            for i in values[0]:
+                for j in values[1]:
+                    temp_values.append(i + j)
+        
+        values[0] = temp_values
+        del values[1]
+    
+    values = values[0]
+    if type(values) != list:
+        values = [values]
+    values = list(set(values))  # Remove duplicates
+    return values
 
 def print_cards(cards, hide_first_card):  # I want to update this later!
     if hide_first_card == False:
@@ -102,7 +130,6 @@ def play_blackjack():
     print(f"Your final cards are: {print_cards(user_cards, False)} that sums these posible values {sum_cards_user}")
     print(f"Computer's final cards are: {print_cards(computer_cards, False)} that sums these posible values {sum_cards_computer}")
 
-
     # Compare sums
     if min(sum_cards_user) > 21 and min(sum_cards_computer) > 21:
         print("Computer and user went over")
@@ -118,11 +145,13 @@ def play_blackjack():
             if value <= 21:
                 temp_sum.append(value)
         sum_cards_user = temp_sum
+        temp_sum = []
         for value in sum_cards_computer:
             if value <= 21:
                 temp_sum.append(value)
         sum_cards_computer = temp_sum
-
+        
+        # Check winenr
         if max(sum_cards_user) == max(sum_cards_computer):
             print("It's a draw")
         elif max(sum_cards_user) > max(sum_cards_computer):
