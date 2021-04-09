@@ -8,3 +8,27 @@ logo = """
       |  \/ K|                            _/ |                
       `------'                           |__/           
 """
+
+card_symbols = ["♠", "♦", "♥", "♣"]
+
+
+def ascii_card(symbol, value):
+    if value == "?":
+        return [
+            '┌─────────┐',
+            '│░░░░░░░░░│',
+            '│░░░░░░░░░│',
+            '│░░░░░░░░░│',
+            '└─────────┘'
+        ]
+
+    symbol = card_symbols[symbol]
+    if len(value) == 1:
+        value = " " + value
+    return [
+        '┌─────────┐',
+        '│{}       │'.format(value),
+        '│    {}    │'.format(symbol),
+        '│       {}│'.format(value),
+        '└─────────┘'
+    ]
