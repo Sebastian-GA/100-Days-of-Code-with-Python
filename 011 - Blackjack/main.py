@@ -85,9 +85,12 @@ def sum_cards(cards_in_hand):
 
 def print_cards(cards_in_hand, hide_first_card):
     temp_cards_in_hand = []
-    temp_cards_in_hand.extend(cards_in_hand)
     if hide_first_card:
-        temp_cards_in_hand[0][0] = "?"
+        temp_cards_in_hand.append(["?", 0])
+        for i in range(1, len(cards_in_hand)):
+            temp_cards_in_hand.append(cards_in_hand[i])
+    else:
+        temp_cards_in_hand = cards_in_hand
     for row in range(5):
         row_str = ""
         for card in temp_cards_in_hand:
@@ -97,13 +100,13 @@ def print_cards(cards_in_hand, hide_first_card):
 
 # Setup
 cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "K", "Q", "J"]
-deck = [cards, cards, cards, cards]
 
 # Game
 clear()
 print(logo)
 while input_option('Do you want to play a game of Blackjack? Type "yes" or "no": ', ["yes", "no"]) == "yes":
-    clear()
+    print("-----------------------------------------")
+    print()
     # Reset deck
     deck = [cards, cards, cards, cards]
 
@@ -122,7 +125,6 @@ while input_option('Do you want to play a game of Blackjack? Type "yes" or "no":
     print_cards(computer_cards, True)
     
     while min(sum_cards(user_cards)) < 21 and input_option('Do you want another card? Type "yes" or "no": ', ["yes", "no"]) == "yes":
-        clear()
         user_cards.append(choose_card())
         print(f"Your cards are:")
         print_cards(user_cards, False)
@@ -130,7 +132,6 @@ while input_option('Do you want to play a game of Blackjack? Type "yes" or "no":
         print_cards(computer_cards, True)
 
     if max(sum_cards(computer_cards)) < 17:
-        clear()
         print(f"Your final cards are:")
         print_cards(user_cards, False)
         print(f"Computer's cards are:")
@@ -146,7 +147,8 @@ while input_option('Do you want to play a game of Blackjack? Type "yes" or "no":
     # Print final cards
     sum_cards_user = sum_cards(user_cards)
     sum_cards_computer = sum_cards(computer_cards)
-    clear()
+    print()
+    print("-----------------------------------------")
     print(f"Your final cards are:")
     print_cards(user_cards, False)
     print(f"Computer's final cards are:")
