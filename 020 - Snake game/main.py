@@ -34,19 +34,23 @@ def update_body():
 
 
 def move_left():
-    snake[0].setheading(180)
+    if snake[0].heading() != 0:
+        snake[0].setheading(180)
 
 
 def move_right():
-    snake[0].setheading(0)
+    if snake[0].heading() != 180:
+        snake[0].setheading(0)
 
 
 def move_up():
-    snake[0].setheading(90)
+    if snake[0].heading() != 270:
+        snake[0].setheading(90)
 
 
 def move_down():
-    snake[0].setheading(270)
+    if snake[0].heading() != 90:
+        snake[0].setheading(270)
 
 
 def new_segment():
@@ -55,13 +59,13 @@ def new_segment():
     snake[0].shape("square")
     snake[0].color("white")
     if snake[1].heading() == 0:
-        snake[0].goto(snake[1].xcor() +20, snake[1].ycor())
+        snake[0].goto(snake[1].xcor() + 20, snake[1].ycor())
     elif snake[1].heading() == 90:
-        snake[0].goto(snake[1].xcor(), snake[1].ycor() +20)
+        snake[0].goto(snake[1].xcor(), snake[1].ycor() + 20)
     elif snake[1].heading() == 180:
-        snake[0].goto(snake[1].xcor() -20, snake[1].ycor())
+        snake[0].goto(snake[1].xcor() - 20, snake[1].ycor())
     else:
-        snake[0].goto(snake[1].xcor(), snake[1].ycor() -20)
+        snake[0].goto(snake[1].xcor(), snake[1].ycor() - 20)
 
     snake[0].setheading(snake[1].heading())
 
