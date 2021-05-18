@@ -1,14 +1,19 @@
 from turtle import Turtle
 
 
+class Segment(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.shape("square")
+        self.color("White")
+        self.penup()
+
+
 class Snake:
     def __init__(self):
         self.segments = []
         for i in range(3):
-            self.segments.append(Turtle())
-            self.segments[i].penup()
-            self.segments[i].shape("square")
-            self.segments[i].color("white")
+            self.segments.append(Segment())
             self.segments[i].goto(i * 20, 0)
 
         self.segments[0].setheading(180)
@@ -38,10 +43,7 @@ class Snake:
             self.segments[0].setheading(270)
 
     def new_segment(self):
-        self.segments.insert(0, Turtle())
-        self.segments[0].penup()
-        self.segments[0].shape("square")
-        self.segments[0].color("white")
+        self.segments.insert(0, Segment())
 
         if self.segments[1].heading() == 0:
             self.segments[0].goto(self.segments[1].xcor() + 20, self.segments[1].ycor())
