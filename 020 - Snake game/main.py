@@ -39,7 +39,7 @@ screen.onkey(key="r", fun=food.appear)
 
 game_is_on = True
 while game_is_on:
-    time.sleep(0.1)
+    time.sleep(0.5)
     screen.update()
     snake.move()
 
@@ -53,4 +53,17 @@ while game_is_on:
 
     score.print_score()
 
+    # Detecting collision with wall
+    snake.head = snake.segments[0]
+    if not (-300 < snake.head.xcor() < 300) or not (-300 < snake.head.ycor() < 300):
+        score.game_over()
+        game_is_on = False
+
+    # Detecting collision with itself
+    if snake.is_colling_itself():
+        score.game_over()
+        game_is_on = False
+
+
+screen.update()
 screen.exitonclick()

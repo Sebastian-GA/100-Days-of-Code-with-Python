@@ -56,3 +56,9 @@ class Snake:
             self.segments[0].goto(self.segments[1].xcor(), self.segments[1].ycor() - 20)
 
         self.segments[0].setheading(self.segments[1].heading())
+
+    def is_colling_itself(self):
+        for i in range(1, len(self.segments)):
+            if self.segments[0].distance(self.segments[i]) < 15:
+                return True
+        return False

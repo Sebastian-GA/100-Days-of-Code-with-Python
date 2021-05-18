@@ -11,6 +11,7 @@ class Scoreboard(Turtle):
         self.text_style = "normal"
         self.text_format = (self.font, self.text_size, self.text_style)
         self.settings()
+        self.speed("fastest")
 
     def settings(self):
         self.reset()
@@ -23,6 +24,11 @@ class Scoreboard(Turtle):
     def print_score(self):
         self.settings()
         text = f"Score: {self.score}"
+        self.write(arg=text, font=self.text_format, align="center")
+
+    def game_over(self):
+        self.goto(0, 0)
+        text = "GAME OVER"
         self.write(arg=text, font=self.text_format, align="center")
 
     def reset_score(self):
