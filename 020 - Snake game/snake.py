@@ -7,6 +7,7 @@ class Segment(Turtle):
         self.shape("square")
         self.color("White")
         self.penup()
+        # self.shapesize(0.9)
 
 
 class Snake:

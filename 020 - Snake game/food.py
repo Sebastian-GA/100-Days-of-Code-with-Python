@@ -3,19 +3,20 @@ import random
 
 
 class Food(Turtle):
-    def __init__(self):
+    def __init__(self, screen_width, screen_height):
         super().__init__()
         self.penup()
         self.color("violet")
         self.shape("square")
         self.shapesize(0.5)
+        self.speed("fastest")
+        self.screen_size = (screen_width, screen_height)
+        self.appear()
 
     def appear(self):
-        xcor = random.randint(-300 + 40, 300 - 40)
-        ycor = random.randint(-300 + 40, 300 - 40)
-        while xcor % 20 != 0:
-            xcor = random.randint(-300 + 40, 300 - 40)
-        while ycor % 20 != 0:
-            ycor = random.randint(-300 + 40, 300 - 40)
+        position = (self.screen_size[0] // 2) // 20
+        position -= 1
+        xcor = random.randint(-position, position) * 20
+        ycor = random.randint(-position, position) * 20
 
         self.goto((xcor, ycor))
