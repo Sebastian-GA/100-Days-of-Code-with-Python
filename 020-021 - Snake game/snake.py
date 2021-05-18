@@ -49,7 +49,7 @@ class Snake:
         self.segments[-1].goto(position)
 
     def is_colling_itself(self):
-        for i in range(1, len(self.segments)):
-            if self.segments[0].distance(self.segments[i]) < 15:
+        for segment in self.segments[1:]:
+            if self.segments[0].distance(segment) < 15:
                 return True
         return False

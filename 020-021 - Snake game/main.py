@@ -39,7 +39,7 @@ screen.onkey(key="r", fun=food.appear)
 
 game_is_on = True
 while game_is_on:
-    time.sleep(0.5)
+    time.sleep(0.1)
     screen.update()
     snake.move()
 
