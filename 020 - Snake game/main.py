@@ -34,7 +34,7 @@ screen.onkey(key="w", fun=snake.turn_up)
 screen.onkey(key="s", fun=snake.turn_down)
 screen.onkey(key="a", fun=snake.turn_left)
 screen.onkey(key="d", fun=snake.turn_right)
-screen.onkey(key="c", fun=snake.new_segment)
+screen.onkey(key="c", fun=snake.extend)
 screen.onkey(key="r", fun=food.appear)
 
 game_is_on = True
@@ -45,7 +45,7 @@ while game_is_on:
 
     # Detecting collision with food
     if is_food_in_contact_with_snake() == [0, True]:
-        snake.new_segment()
+        snake.extend()
         score.increase()
         food.appear()
         while is_food_in_contact_with_snake()[1]:

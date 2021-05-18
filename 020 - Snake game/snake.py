@@ -43,19 +43,10 @@ class Snake:
         if self.segments[0].heading() != 90:
             self.segments[0].setheading(270)
 
-    def new_segment(self):
-        self.segments.insert(0, Segment())
-
-        if self.segments[1].heading() == 0:
-            self.segments[0].goto(self.segments[1].xcor() + 20, self.segments[1].ycor())
-        elif self.segments[1].heading() == 90:
-            self.segments[0].goto(self.segments[1].xcor(), self.segments[1].ycor() + 20)
-        elif self.segments[1].heading() == 180:
-            self.segments[0].goto(self.segments[1].xcor() - 20, self.segments[1].ycor())
-        else:
-            self.segments[0].goto(self.segments[1].xcor(), self.segments[1].ycor() - 20)
-
-        self.segments[0].setheading(self.segments[1].heading())
+    def extend(self):
+        position = self.segments[-1].position()
+        self.segments.append(Segment())
+        self.segments[-1].goto(position)
 
     def is_colling_itself(self):
         for i in range(1, len(self.segments)):
